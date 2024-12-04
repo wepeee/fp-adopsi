@@ -1,0 +1,52 @@
+.yellow-box {
+  width: 97%;
+  height: 50px;
+  background-color: #ffcd29;
+  border-radius: 16px;
+  margin: 10px auto;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+main .logo-login {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main .logo-login img {
+  width: 90%;
+  display: block;
+  margin: auto;
+}
+
+main .container-form {
+  width: 50%;
+  padding-bottom: 100px;
+}
+
+.container-form {
+  background-color: #f9fbfd;
+  border: 1px solid #d1d9e2;
+  border-radius: 18px;
+  padding: 20px 40px;
+}
+
+.btn {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.container-form p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.container-form a {
+  color: #80c2e6;
+}
