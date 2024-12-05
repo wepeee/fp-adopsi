@@ -29,3 +29,13 @@
   background-color: #70bdfc;
   padding: 0 25px;
 }
+
+.container-content {
+  width: 80%;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 30px 5px;
+}
