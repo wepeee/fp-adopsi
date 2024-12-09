@@ -1,0 +1,28 @@
+.my-link {
+  justify-content: end;
+  width: 100%;
+}
+
+.btn-masuk {
+  background-color: #d3d6d9;
+  padding: 0 25px;
+}
+
+.btn-daftar {
+  background-color: #70bdfc;
+  padding: 0 25px;
+}
+
+.yellow-box {
+  width: 97%;
+  height: 50px;
+  background-color: #ffcd29;
+  border-radius: 16px;
+  margin: 10px auto;
+  height: fit-content;
+  padding: 20px;
+}
+
+.container-fluid .card {
+  margin: 20px 10px;
+}
