@@ -7,19 +7,6 @@
   width: 100%;
 }
 
-.dropdown-menu {
-  position: absolute;
-}
-
-.jumbotron {
-  background-color: #ffcd29;
-  text-align: center;
-  height: 50vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .btn-masuk {
   background-color: #d3d6d9;
   padding: 0 25px;
@@ -28,6 +15,32 @@
 .btn-daftar {
   background-color: #70bdfc;
   padding: 0 25px;
+}
+
+.jumbotron {
+  background-color: #ffcd29;
+  text-align: center;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.hero {
+  background-image: url(../images/hero.png);
+  height: 25em;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero a {
+  inset: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  bottom: -70%;
 }
 
 .container-content {
