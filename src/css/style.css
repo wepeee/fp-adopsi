@@ -12,6 +12,8 @@ body::-webkit-scrollbar {
 
 nav {
   border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
 }
 
 main {
