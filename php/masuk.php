@@ -15,9 +15,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verifikasi password
             if (password_verify($password, $user['password'])) {
+                // Menyimpan data pengguna ke session
                 $_SESSION['user'] = $user;
-                header("Location: ../index.php");
-                exit;
+
+                // Cek role pengguna
+                if ($user['role'] == 'admin') {
+                    // Jika admin, arahkan ke halaman admin
+                    header("Location: ../admin_dashboard.php"); // Ganti dengan halaman admin yang sesuai
+                    exit;
+                } else {
+                    // Jika user biasa, arahkan ke halaman utama
+                    header("Location: ../index.php");
+                    exit;
+                }
             } else {
                 $_SESSION['error'] = "Password salah!";
                 header("Location: ../login.php");
