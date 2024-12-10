@@ -1,6 +1,17 @@
 <?php
 session_start();
 
+include 'php/db_config.php';
+
+// Ambil data dari database
+$query = "SELECT * FROM item_hewan";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+  echo "Gagal mengambil data dari database: " . mysqli_error($conn);
+  exit;
+}
+
 // Mencegah halaman disimpan dalam cache oleh browser
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Pragma: no-cache");
@@ -106,110 +117,28 @@ if (!isset($_SESSION['user'])) {
   </div>
 
   <div class="container-fluid d-flex justify-content-around flex-wrap">
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
-      </div>
-    </div>
 
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
-      </div>
-    </div>
+    <?php while ($item = mysqli_fetch_assoc($result)): ?>
 
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
-      </div>
-    </div>
+      <div class="card" style="width: 18rem">
+        <img src="<?php echo $item['gambar']; ?>" class="card-img-top" alt="<?php echo $item['nama']; ?>" />
+        <div class="card-body d-flex flex-column justify-content-between">
 
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
-      </div>
-    </div>
+          <div>
+            <h5 class="card-title"><?php echo $item['nama']; ?></h5>
+            <p class="card-text">
+              <?php echo substr($item['deskripsi'], 0, 100); ?>...
+            </p>
+          </div>
 
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
+          <a style="width: fit-content;" href="detail.php?id=<?php echo $item['id']; ?>" class="btn badge text-bg-primary rounded-pill mt-2">Detail</a>
+        </div>
       </div>
-    </div>
 
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
-      </div>
-    </div>
+    <?php endwhile; ?>
+  </div>
 
-    <div class="card" style="width: 18rem">
-      <img
-        src="src/images/kucing/cat.4001.jpg"
-        class="card-img-top"
-        alt="cat" />
-      <div class="card-body">
-        <h5 class="card-title">Nama Kucing</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn badge text-bg-primary rounded-pill">Detail</a>
-      </div>
-    </div>
+
   </div>
 
   <script
@@ -219,3 +148,8 @@ if (!isset($_SESSION['user'])) {
 </body>
 
 </html>
+
+<?php
+// Tutup koneksi setelah selesai
+mysqli_close($conn);
+?>
