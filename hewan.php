@@ -132,6 +132,7 @@ if (!isset($_SESSION['user'])) {
           </div>
 
           <a style="width: fit-content;" href="detail.php?id=<?php echo $item['id']; ?>" class="btn badge text-bg-primary rounded-pill mt-2">Detail</a>
+
         </div>
       </div>
 
