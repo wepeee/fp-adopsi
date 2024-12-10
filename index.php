@@ -88,7 +88,7 @@ if (!isset($_SESSION['user'])) {
       </div>
     </div>
 
-    <div class="container-content d-flex justify-content-evenly"></div>
+
   </main>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
