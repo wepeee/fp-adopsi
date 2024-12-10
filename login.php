@@ -7,6 +7,52 @@ if (isset($_SESSION['user'])) {
   header("Location: index.php"); // Ganti dengan halaman yang sesuai
   exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  require_once 'php/db_config.php';
+
+  // Ambil data dari form login
+  $email = isset($_POST['email']) ? $_POST['email'] : null;
+  $password = isset($_POST['password']) ? $_POST['password'] : null;
+
+  if (!empty($email) && !empty($password)) {
+    // Query untuk mencari user berdasarkan email
+    $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+      $user = mysqli_fetch_assoc($result);
+
+      // Verifikasi password
+      if (password_verify($password, $user['password'])) {
+        // Simpan data user ke session
+        $_SESSION['user'] = $user;
+
+        // Cek role pengguna
+        if ($user['role'] === 'admin') {
+          // Jika admin, arahkan ke halaman admin
+          header("Location: admin_dashboard.php"); // Ganti dengan halaman admin
+        } else {
+          // Jika user biasa, arahkan ke halaman utama
+          header("Location: index.php"); // Ganti dengan halaman utama
+        }
+        exit;
+      } else {
+        $_SESSION['error'] = "Password salah!";
+        header("Location: login.php");
+        exit;
+      }
+    } else {
+      $_SESSION['error'] = "Email tidak terdaftar.";
+      header("Location: login.php");
+      exit;
+    }
+  } else {
+    $_SESSION['error'] = "Harap isi semua field!";
+    header("Location: login.php");
+    exit;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +85,15 @@ if (isset($_SESSION['user'])) {
     <div class="container-form">
       <h2>Login</h2>
       <hr />
-      <form method="POST" action="./php/masuk.php">
+
+      <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger" role="alert">
+          <?php echo $_SESSION['error'];
+          unset($_SESSION['error']); ?>
+        </div>
+      <?php endif; ?>
+
+      <form method="POST" action="login.php">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
@@ -63,7 +117,6 @@ if (isset($_SESSION['user'])) {
 
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
-
 
       <p>Belum punya akun? <a href="register.php">Daftar</a></p>
     </div>

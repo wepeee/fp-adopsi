@@ -20,3 +20,12 @@ main {
   width: 80%;
   margin: auto;
 }
+
+.navbar {
+  border-bottom: 0px;
+}
+
+.my-link {
+  justify-content: end;
+  width: 100%;
+}
