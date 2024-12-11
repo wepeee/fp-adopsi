@@ -47,12 +47,22 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
-        <!-- Card for displaying item details -->
-        <div class="card" style="width: 18rem;">
-            <img src="<?php echo $item['gambar']; ?>" class="card-img-top" alt="<?php echo $item['nama']; ?>">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $item['nama']; ?></h5>
-                <p class="card-text"><?php echo $item['deskripsi']; ?></p>
+        <!-- Grid layout -->
+        <div class="row align-items-start">
+            <!-- Card untuk foto dan nama -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="<?php echo $item['gambar']; ?>" class="card-img-top" alt="<?php echo $item['nama']; ?>">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><?php echo $item['nama']; ?></h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deskripsi di sebelah card -->
+            <div class="col-md-8">
+                <h3>Deskripsi</h3>
+                <p><?php echo $item['deskripsi']; ?></p>
 
                 <!-- Kembali ke halaman sebelumnya -->
                 <a href="hewan.php" class="btn btn-secondary">Kembali</a>
