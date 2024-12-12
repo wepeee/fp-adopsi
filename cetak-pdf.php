@@ -6,7 +6,7 @@ ob_start();
 include("php/db_config.php");
 
 // Include the FPDF library
-require('fpdf186/fpdf.php');
+require 'fpdf/fpdf.php';
 
 // Create a new FPDF instance and set up the page
 $pdf = new FPDF('L', 'mm', 'A4');
