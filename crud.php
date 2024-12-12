@@ -131,6 +131,9 @@ $result = mysqli_query($conn, $query);
         <hr>
 
         <!-- Tabel Item Hewan -->
+        <form action="cetak-pdf.php" method="post">
+            <button type="submit" class="btn btn-primary">Cetak PDF</button>
+        </form>
         <h2>Daftar Item Hewan</h2>
         <table class="table">
             <thead>
