@@ -69,7 +69,11 @@ if (!isset($_SESSION['user'])) {
           id="navbarSupportedContent">
           <ul class="my-link navbar-nav me-auto mb-2 mb-lg-0 ml">
             <li class="nav-item ms-3">
-              <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
+              <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin'): ?>
+                  <a class="nav-link active" aria-current="page" href="./admin_dashboard.php">Home</a>
+              <?php elseif (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'user'): ?>
+                  <a class="nav-link" href="index.php">Home</a>
+              <?php endif; ?>
             </li>
             <li class="nav-item ms-3">
               <?php if (isset($_SESSION['user'])): ?>

@@ -1,6 +1,7 @@
 <?php
 // Hubungkan ke database
-include 'php/db_config.php'; // Pastikan file ini ada dan jalurnya benar
+include 'php/db_config.php';
+require 'fpdf/fpdf.php';
 
 // Cek apakah ID ada di URL
 if (isset($_GET['id'])) {
@@ -19,6 +20,23 @@ if (isset($_GET['id'])) {
     }
 } else {
     echo "ID item tidak ditemukan.";
+    exit;
+}
+
+// PDF
+if (isset($_GET['export']) && $_GET['export'] == 'pdf') {
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->Cell(0, 10, 'Detail Hewan: ' . $item['nama'], 0, 1, 'C');
+    $pdf->Ln(10);
+
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->MultiCell(0, 10, "Nama: " . $item['nama']);
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 10, "Deskripsi: " . $item['deskripsi']);
+
+    $pdf->Output('D', $item['nama'] . '_detail.pdf');
     exit;
 }
 ?>
@@ -47,12 +65,22 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
-        <!-- Card for displaying item details -->
-        <div class="card" style="width: 18rem;">
-            <img src="<?php echo $item['gambar']; ?>" class="card-img-top" alt="<?php echo $item['nama']; ?>">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $item['nama']; ?></h5>
-                <p class="card-text"><?php echo $item['deskripsi']; ?></p>
+        <!-- Grid layout -->
+        <div class="row align-items-start">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="<?php echo $item['gambar']; ?>" class="card-img-top" alt="<?php echo $item['nama']; ?>">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><?php echo $item['nama']; ?></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <h3>Deskripsi</h3>
+                <p><?php echo $item['deskripsi']; ?></p>
+
+                <a href="detail.php?id=<?php echo $id; ?>&export=pdf" class="btn btn-primary">Export ke PDF</a>
 
                 <!-- Kembali ke halaman sebelumnya -->
                 <a href="hewan.php" class="btn btn-secondary">Kembali</a>
